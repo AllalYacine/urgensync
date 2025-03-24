@@ -7,9 +7,35 @@
         <div class="container">
             <div class="form-container">
                 <div class="logo-container">
+                    <!-- for the logo icon, maybe imported from font awesome -->
+                    <i></i>
                     <h1>URGENSYNC</h1>
+                </div>
+                <div class="form-wrapper">
+                    <form id="loginForm" class="active">
+                        <h2>Welcome Back!</h2>
+                        <div class="input-group">
+                            <!-- envelope icon to be added later by font awesome -->
+                            <i></i>
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="input-group">
+                            <!-- Password lock icon to be added later by font awesome -->
+                            <i></i>
+                            <input type="password" placeholder="Password" required>
+                        </div>
+                        <div class="remember-forgot">
+                            <label>
+                                <input type="checkbox">
+                                Remember me
+                            </label>
+                            <a href="#" class="forgot-password">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="submit-button">Login</button>
+                    </form>
                 </div>
             </div>
         </div>
+        <script src="login.js"></script>
     </body>
 </html>
