@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const showError = (input, message) => {
         const formInfo = input.parentElement;
         const errorDiv = document.createElement('div');
+        // random styling
         errorDiv.className = 'error-message';
         errorDiv.style.color = '#ff3333'
         errorDiv.style.fontSize = '0.8em';
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // after clicking on the submission button and everything goes right, we make a success message 
     const showSuccess = (form, message) => {
         const successDiv = document.createElement('div');
+        // random styling 
         successDiv.className = 'success-message';
         successDiv.style.backgroundColor = '#4CAF50';
         successDiv.style.color = 'white';
@@ -62,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
             showError(email, 'Please enter a valid email');
             return;
         }
-
         // this is just a test to know it works
         showSuccess(loginForm, 'Login successful!');
         loginForm.reset();
