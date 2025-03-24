@@ -35,6 +35,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     };
 
+    // after clicking on the submission button and everything goes right, we make a success message 
+    const showSuccess = (form, message) => {
+        const successDiv = document.createElement('div');
+        successDiv.className = 'success-message';
+        successDiv.style.backgroundColor = '#4CAF50';
+        successDiv.style.color = 'white';
+        successDiv.style.padding = '10px';
+        successDiv.borderRadius = '5px';
+        successDiv.marginTop = '10px';
+        successDiv.style.textAlign = 'center';
+        successDiv.textContent = message;
+
+        form.appendChild = message;
+
+        // same thing with the timeout
+        setTimeout(() => {
+            successDiv.remove();
+        }, 3000);
+    }
+
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault(); // i added this to prevent the reload of the page after submission
         const email = loginForm.querySelector('input[type="email"]');
@@ -44,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
             showError(email, 'Please enter a valid email');
             return;
         }
-
-    })
+    });
 
 });
