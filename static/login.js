@@ -1,5 +1,3 @@
-const { setTimeout } = require("timers");
-
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
 
@@ -64,6 +62,21 @@ document.addEventListener('DOMContentLoaded', () => {
             showError(email, 'Please enter a valid email');
             return;
         }
+
+        // this is just a test to know it works
+        showSuccess(loginForm, 'Login successful!');
+        loginForm.reset();
     });
 
+    // these animations will look more good with the css applied i think they look cool
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.parentElement.style.transform = 'scale(1.02)';
+        });
+
+        input.addEventListener('blur', () => {
+            input.parentElement.style.transform = 'scale(1)';
+        });
+    })
 });
