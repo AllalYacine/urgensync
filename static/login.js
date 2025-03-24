@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         successDiv.style.textAlign = 'center';
         successDiv.textContent = message;
 
-        form.appendChild = message;
+        form.appendChild(successDiv);
 
         // same thing with the timeout
         setTimeout(() => {
@@ -80,3 +80,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     })
 });
+
+// i will remove these comments later once confirmed
