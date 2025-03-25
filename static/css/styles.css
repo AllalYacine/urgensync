@@ -42,7 +42,7 @@ body {
 /* CONTAINERS */
 
 .container {
-    border: solid 2px blue;
+    /* border: solid 2px blue; */
     width: 100%;
     max-width: 450px;
     padding: 20px;
@@ -50,7 +50,7 @@ body {
 }
 
 .form-container {
-    border: solid red 2px;
+    /* border: solid red 2px; */
     background: rgba(255, 255, 255, 0.95);
     padding: 40px;
     border-radius: 20px;
@@ -121,6 +121,59 @@ form.active {
         transform: translateY(0) scale(1);
     }
 }
+
+h2 {
+    color: var(--dark-text);
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 1.9em;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.input-info input,
+.input-info select {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    font-size: 1em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.9);
+    font-family: inherit;
+}
+
+.input-info select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+    padding-right: 45px;
+}
+
+.input-info input:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.1);
+    background: rgba(255, 255, 255, 1);
+}
+
+.input-info select:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.1);
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.input-info input:focus + i,
+.input-info select:focus + i {
+    color: var(--primary-blue);
+    transform: translateY(-50%) scale(1.1);
+} 
 
 
 
