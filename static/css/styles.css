@@ -272,5 +272,37 @@ h2 {
     left: 100%;
 }
 
+/* SWITCH FORM SECTION */
+.switch-form {
+    text-align: center;
+    margin-top: 25px;
+    color: var(--dark-text);
+    font-size: 0.95em;
+}
+
+.switch-form a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.switch-form a:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: var(--primary-blue);
+    transition: all 0.3 ease;
+}
+
+.switch-form a:hover:after {
+    width: 100%;
+}
+
 
 
