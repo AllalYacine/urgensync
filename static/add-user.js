@@ -38,7 +38,29 @@ document.addEventListener('DOMContentLoaded', () => {
             errorDiv.remove();
             input.style.borderColor = "#ddd";
         }, 3000);
-    }
+    };
+
+    // the success message
+    const showSuccess = (form, message) => {
+        const successDiv = document.createElement('div');
+        successDiv.className = 'success-message';
+        successDiv.style.backgroundColor = "#4caf50";
+        successDiv.style.color = 'white';
+        successDiv.style.padding = "10px";
+        successDiv.style.borderRadius = "5px";
+        successDiv.style.marginTop = "10px";
+        successDiv.style.textAlign = "center";
+        successDiv.textContent = message;
+
+        form.appendChild(successDiv);
+
+        // 3 seconds
+        setTimeout(() => {
+            successDiv.remove();
+        }, 3000);
+    };
 
     
+
+
 });
