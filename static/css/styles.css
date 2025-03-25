@@ -69,7 +69,7 @@ body {
 
 .logo-container {
     text-align: center;
-    margin-bottom: center;
+    margin-bottom: 35px;
     position: relative;
 }
 
@@ -94,6 +94,8 @@ body {
     letter-spacing: -0.5px;
     text-shadow: 0 2px 4px var(--shadow-color);
 }
+
+/* FORM */
 
 .form-container {
     position: relative;
@@ -122,6 +124,8 @@ form.active {
     }
 }
 
+/* INPUT INFORMATION SECTION */
+
 h2 {
     color: var(--dark-text);
     text-align: center;
@@ -129,6 +133,21 @@ h2 {
     font-size: 1.9em;
     font-weight: 600;
     letter-spacing: -0.3px;
+}
+
+.input-info {
+    position: relative;
+    margin-bottom: 25px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-info i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .input-info input,
@@ -173,7 +192,34 @@ h2 {
 .input-info select:focus + i {
     color: var(--primary-blue);
     transform: translateY(-50%) scale(1.1);
-} 
+}
+
+/* REMEMBER - FORGOT SECTION */
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 0.95em;
+}
+
+.remember-forgot label {
+    color: var(--dark-text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.remember-forgot input[type="checkbox"] {
+    margin-right: 5px;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-blue);
+}
+
 
 
 
