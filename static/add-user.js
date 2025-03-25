@@ -60,7 +60,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     };
 
-    
+    // submission 
+    addUserForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = addUserForm.querySelector('input[type="text"]');
+        const email = addUserForm.querySelector('input[type="email"]');
+        const password = addUserForm.querySelectorAll('input[type="password"]')[0];
+        const confirmPassword = addUserForm.querySelectorAll('input[type="password"]')[1];
+        const role = addUserForm.querySelector('select');
+
+        if (name.value.length < 3) {
+            showError(name, 'Name must be at least 3 characters long');
+            return;
+        }
+
+        if (!validateEmail(email.value)) {
+            showError(email, 'Please enter a valid email');
+            return;
+        }
+
+        if (!validatePassword(password.value)) {
+            showError(password, 'Password must be at least 8 characters long and contain uppercase, lowercase and numbers');
+            return;
+        }
+
+        if (password.value !== confirmPassword.value) {
+            showError(confirmPassword, 'Passwords do not match');
+            return;
+        }
+
+        if (!role.value) {
+            showError(role, 'Please select a role');
+            return;
+        }
+
+        // show the message of success
+        showSuccess(addUserForm, 'User added successfully!');
+        addUserForm.reset();
+    });
 
 
 });
