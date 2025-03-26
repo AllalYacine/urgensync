@@ -21,51 +21,59 @@ document.addEventListener('DOMContentLoaded', () => {
         formInfo.appendChild(errorDiv);
         input.style.borderColor= "#ff3333";
 
+        // // THIS DOESN'T WOOOOOOORK
         // if an error message already exists and then another one comes then we remove the previous one idk i found it on a video
-        const existingError = formInfo.querySelector('.error-message');
-        if(existingError) {
-            formInfo.removeChild(existingError);
-        }
+        //const existingError = formInfo.querySelector('.error-message');
+        //if(existingError) {
+         //   formInfo.removeChild(existingError);
+        //}
 
-        // after 3 seconds, the error disappears, you can change the time as you like
+        // after 15 seconds, 
         setTimeout(() => {
             errorDiv.remove();
             input.style.borderColor = '#ddd';
-        }, 3000);
+        }, 150000);
     };
 
-    // after clicking on the submission button and everything goes right, we make a success message 
-    const showSuccess = (form, message) => {
-        const successDiv = document.createElement('div');
-        // random styling 
-        successDiv.className = 'success-message';
-        successDiv.style.backgroundColor = '#4CAF50';
-        successDiv.style.color = 'white';
-        successDiv.style.padding = '10px';
-        successDiv.borderRadius = '5px';
-        successDiv.marginTop = '10px';
-        successDiv.style.textAlign = 'center';
-        successDiv.textContent = message;
+   // show success is useless, user is going to be redirected to home page
 
-        form.appendChild(successDiv);
-
-        // same thing with the timeout
-        setTimeout(() => {
-            successDiv.remove();
-        }, 3000);
-    }
-
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', async (e) => {
         e.preventDefault(); // i added this to prevent the reload of the page after submission
         const email = loginForm.querySelector('input[type="email"]');
         const password = loginForm.querySelector('input[type="password"]');
 
-        if(!validateEmail(email.value)) {
+       /*  if(!validateEmail(email.value)) {
             showError(email, 'Please enter a valid email');
             return;
+        } */
+        
+        // send data to server --
+        const formData = new URLSearchParams();
+        formData.append("email", loginForm.querySelector('input[name="email"]').value);
+        formData.append("password", loginForm.querySelector('input[name="password"]').value);
+
+        const response = await fetch(loginForm.action, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: formData.toString()
+        });
+    
+        const result = await response.json();
+
+        console.log(result.error); // for testing
+        
+        if (result.userError) {
+            showError(email, result.userError);
+        } else if (result.passwordError){
+            showError(password, result.passwordError);
+        };// else the server will redirect u to home page
+
+        if (result.redirect) {
+            window.location.href = result.redirect; // browser handle the redirect
         }
-        // this is just a test to know it works
-        showSuccess(loginForm, 'Login successful!');
+
         loginForm.reset();
     });
 

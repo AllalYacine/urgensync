@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const addUserForm = document.getElementById('addUserForm');
 
+    const validateFullName = (full_name) => {
+        const fullNameRegex = /^[A-Za-z]+( [A-Za-z]+)?$/;
+        return fullNameRegex.test(full_name);
+    }
+
     // validation of the form, again this is dummy
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -24,44 +29,27 @@ document.addEventListener('DOMContentLoaded', () => {
         errorDiv.style.marginTop = "5px";
         errorDiv.textContent = message;
 
-        // remove the existing messages ... if they exist already
-        const existingError = formInfo.querySelector('.error-message');
+        // THIS DOESN'T WOOOOOOORK
+        /* const existingError = formInfo.querySelector('.error-message');
         if (existingError) {
             formInfo.removeChild(existingError);
-        }
+        } */
 
         formInfo.appendChild(errorDiv);
         input.style.borderColor = "#ff3333";
 
-        // after 3 seconds poof
+        // after 15 seconds poof
         setTimeout(() => {
             errorDiv.remove();
             input.style.borderColor = "#ddd";
-        }, 3000);
+        }, 150000);
     };
 
     // the success message
-    const showSuccess = (form, message) => {
-        const successDiv = document.createElement('div');
-        successDiv.className = 'success-message';
-        successDiv.style.backgroundColor = "#4caf50";
-        successDiv.style.color = 'white';
-        successDiv.style.padding = "10px";
-        successDiv.style.borderRadius = "5px";
-        successDiv.style.marginTop = "10px";
-        successDiv.style.textAlign = "center";
-        successDiv.textContent = message;
-
-        form.appendChild(successDiv);
-
-        // 3 seconds
-        setTimeout(() => {
-            successDiv.remove();
-        }, 3000);
-    };
+    // show success is useless, user is going to be redirected to login page
 
     // submission 
-    addUserForm.addEventListener('submit', (e) => {
+    addUserForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const name = addUserForm.querySelector('input[type="text"]');
         const email = addUserForm.querySelector('input[type="email"]');
@@ -69,8 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const confirmPassword = addUserForm.querySelectorAll('input[type="password"]')[1];
         const role = addUserForm.querySelector('select');
 
-        if (name.value.length < 3) {
-            showError(name, 'Name must be at least 3 characters long');
+        if (!validateFullName(name.value) && name.value.length < 3) {
+            showError(name, 'Invalid name format. Use only letters and a single space. Atleast 3 character long.');
             return;
         }
 
@@ -94,10 +82,44 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // show the message of success
-        showSuccess(addUserForm, 'User added successfully!');
+        // send data to server
+        const formData = new URLSearchParams();
+        formData.append("email", addUserForm.querySelector('input[name="email"]').value);
+        formData.append("full_name", addUserForm.querySelector('input[name="full_name"]').value);
+        formData.append("password", addUserForm.querySelector('input[name="password"]').value);
+        formData.append("role", addUserForm.querySelector('select[name="role"]').value);
+
+        const response = await fetch(addUserForm.action, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: formData.toString()
+        });
+    
+        const result = await response.json();
+
+        console.log(result.error); // for testing
+        
+        if (result.emailError) {
+            showError(email, result.emailError);
+        } else if (result.passwordError){
+            showError(password, result.passwordError);
+        } else if (result.userError) {
+            showError(email, result.userError);
+        } else if (result.serverError) {
+            showError(email, result.serverError);
+        }; // else the server will redirect u to home page
+
+        if (result.redirect) {
+            window.location.href = result.redirect; // browser handle the redirect
+        }
+
         addUserForm.reset();
     });
+
+    // send data to server
+
 
     // animations the same as login
     const inputs = document.querySelectorAll('input, select');
