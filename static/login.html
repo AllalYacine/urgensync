@@ -16,15 +16,15 @@
                     <h1>URGENSYNC</h1>
                 </div>
                 <div class="form-wrapper">
-                    <form id="loginForm" class="active">
+                    <form id="loginForm" class="active" action="/login" method="POST">
                         <h2>Welcome Back!</h2>
                         <div class="input-info">
                             <i class="fas fa-envelope"></i>
-                            <input type="email" placeholder="Email" required>
+                            <input type="email" name="email" placeholder="Email" required>
                         </div>
                         <div class="input-info">
                             <i class="fas fa-lock"></i>
-                            <input type="password" placeholder="Password" required>
+                            <input type="password" name="password" placeholder="Password" required >
                         </div>
                         <div class="remember-forgot">
                             <label>

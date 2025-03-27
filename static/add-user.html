@@ -18,19 +18,19 @@
                     <h1>URGENSYNC</h1>
                 </div>
                 <div class="form-wrapper">
-                    <form id="addUserForm" class="active">
+                    <form id="addUserForm" class="active" method="POST" action="/create-user">
                         <h2>Add New User</h2>
                         <div class="input-info">
                             <i class="fas fa-user"></i>
-                            <input type="text" placeholder="Full Name" required>
+                            <input type="text" placeholder="Full Name" required name="full_name">
                         </div>
                         <div class="input-info">
                             <i class="fas fa-envelope"></i>
-                            <input type="email" placeholder="Email" required>
+                            <input type="email" placeholder="Email" required name="email">
                         </div>
                         <div class="input-info">
                             <i class="fas fa-lock"></i>
-                            <input type="password" placeholder="Password" required>
+                            <input type="password" placeholder="Password" required name="password">
                         </div>
                         <div class="input-info">
                             <i class="fas fa-lock"></i>
@@ -38,16 +38,16 @@
                         </div>
                         <div class="input-info">
                             <i class="fas fa-user-tag"></i>
-                            <select required>
+                            <select required name="role">
                                 <option value="" disabled selected>Select Role</option>
-                                <option value="doctor">Doctor</option>
-                                <option value="nurse">Nurse</option>
-                                <option value="staff">Admin</option>
+                                <option value="Doctor">Doctor</option>
+                                <option value="Nurse">Nurse</option>
+                                <option value="Admin">Admin</option>
                             </select>
                         </div>
                         <button type="submit" class="submit-button">Add User</button>
                         <p class="switch-form">
-                            <a href="login.html">Back to Login</a>
+                            <a href="/login">Back to Login</a>
                         </p>
                     </form>
                 </div>
