@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return idRegex.test(id);
     };
 
-    // Validate location (at least 3 characters)
     const validateLocation = (location) => {
         return location.trim().length >= 3;
     };
@@ -16,13 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return nameRegex.test(name) && name.length >= 3;
     };
 
-    // Validate phone number (only digits, at least 8 characters)
     const validateDriverContact = (contact) => {
         const phoneRegex = /^[0-9]{10}$/;
         return phoneRegex.test(contact);
     };
 
-    // Show error message
     const showError = (input, message) => {
         const formInfo = input.parentElement;
         const errorDiv = document.createElement('div');
@@ -80,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Prepare form data
         const formData = new URLSearchParams();
         formData.append("ambulance_id", ambulanceID.value);
         formData.append("location", location.value);
@@ -118,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
         addAmbulanceForm.reset();
     });
 
-    // Input animations (same as login)
     const inputs = document.querySelectorAll('input, select');
     inputs.forEach(input => {
         input.addEventListener('focus', () => {
