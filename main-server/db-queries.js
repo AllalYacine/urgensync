@@ -31,9 +31,10 @@ async function createUser(email, full_name, user_role, hashed_password) {
 
 // -- AMBULANCE QUERIES
 
-async function createAmbulance(matricule) {
+async function createAmbulance(matricule, status, driver_name, driver_contact) {
     try {
-        await db.none('INSERT INTO ambulances (matricule) VALUES ($1)', [matricule]);
+        ambulance_data = [matricule, status, driver_name, driver_contact]
+        await db.none('INSERT INTO ambulances (matricule, status, driver_name, driver_contact) VALUES ($1, $2, $3, $4)', ambulance_data);
         return true;
     } catch (error) {
         console.log(error);

@@ -12,8 +12,8 @@ const secretKey = '9891af8d6708c8eb385a3064e3d87304b578b0f9ec7e98bce96cc15a028df
 
 
 // create an access token
-function createAccessToken({id, full_name, user_role, email}) {
-    return jwt.sign({id, full_name, user_role, email}, secretKey, { expiresIn: '24h' }); // expires in 1 day, each day they must login again
+function createAccessToken({id, full_name, role, email}) {
+    return jwt.sign({id, full_name, role, email}, secretKey, { expiresIn: '24h' }); // expires in 1 day, each day they must login again
   }
 
 

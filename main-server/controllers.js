@@ -36,7 +36,7 @@ const login = async (req, res) => {
 
     if (user && isPasswordCorrect) {
         // generate token
-        const userToken = myJwt.createAccessToken({id: user.id, full_name: user.full_name, user_role: user.user_role, email:user.email});
+        const userToken = myJwt.createAccessToken({id: user.id, full_name: user.full_name, role: user.user_role, email:user.email});
         // store it in a http-only cookie and then send it to client
         // I'M SENDING ACCESS TOKENS IN HTTP ONLY COOKIES BECAUSE THIS IS A WEB BASED ONLY APP
         res.cookie('jwt-token-cookie', userToken, {maxAge: 86400000, httpOnly: true}); // it will last 1 day
@@ -58,7 +58,7 @@ const logout = (req,res) => {
 // -- CREATE A NEW USER --
 const getCreateUser = (req,res) => {
 
-    const role = req.user.user_role;
+    const role = req.user.role;
 
     if (role != 'Admin') {
         res.send("You're not an admin, only admins can create new users");
@@ -70,7 +70,7 @@ const getCreateUser = (req,res) => {
 
 const createUser = async (req,res) => {
 
-    if (req.user.user_role != 'Admin') {
+    if (req.user.role != 'Admin') {
         return res.json({"error":"you're not an admin"});
     }
 
@@ -107,7 +107,7 @@ const createUser = async (req,res) => {
 
 const home = (req,res) => {
     const full_name = req.user.full_name;
-    const role = req.user.user_role;
+    const role = req.user.role;
 
     return res.json({
         "message":`Hello ${full_name}`,
@@ -117,30 +117,50 @@ const home = (req,res) => {
 
 
 // -- CREATE A NEW AMBULANCE --
+const getAddAmbulance = (req,res) => {
+    if (req.user.role != 'Admin') {
+        return res.redirect('/');
+    }
 
-const createAmbulance = async (req,res) => {
+    return res.sendFile(getStaticFilePath('add-ambulance.html'));
+}
 
-    if (!req.user.isAdmin) {
+
+const addAmbulance = async (req,res) => {
+
+    if (req.user.role != 'Admin') {
         return res.json({"error":"only admins can create new ambulances"});
     }
 
-    const matricule = req.body.matricule;
+    const matricule = req.body.ambulance_id;
+    const status = req.body.status;
+    const driverName = req.body.driver_name;
+    const driverContact = req.body.driver_contact;
 
     if (!matricule) {
-        return res.json({"error":"empty matricule"});
+        return res.json({"ambulanceError":"Registration Number shouldn't be empty"});
     }
 
-    const isCreated = await dbq.createAmbulance(matricule);
+    const nameRegex = /^[A-Za-z]+( [A-Za-z]+)?$/;
+    if (!nameRegex.test(driverName)) {
+        return res.json({"driverError":"Invalid driver name"})
+    }
+
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(driverContact)) {
+        return res.json({"contactError":"Invalid contact number"})
+    }
+
+    const isCreated = await dbq.createAmbulance(matricule, status, driverName, driverContact);
     if (isCreated) {
-        return res.json({"message":"Ambulance created successfully"});
+        return res.json({"redirect":"/"}); // this should be a redirect to ambulances list page when we create it
     } else {
-        return res.json({"error":"an error occurred in db"});
+        return res.json({"serverError":"an error occurred in the database"});
     }
 
 }
 
 // -- GET ALL AMBULANCES --
-
 const ambulancesList = async (req, res) => {
     const ambulances = await dbq.getAmbulancesList();
     return res.json(ambulances);
@@ -148,4 +168,4 @@ const ambulancesList = async (req, res) => {
 
 // -------------------------------------------------------------
 
-module.exports = {home, createUser, getCreateUser, login, logout, getLogin, createAmbulance, ambulancesList}
+module.exports = {home, createUser, getCreateUser, login, getLogin, logout, addAmbulance, getAddAmbulance, ambulancesList}

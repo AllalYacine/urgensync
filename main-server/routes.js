@@ -13,7 +13,8 @@ app.get('/', jwt_auth_middleware.jwtAuthenticate, controller.home);
 
 
 // -- CREATE A NEW AMBULANCE --
-app.post('/create-ambulance', jwt_auth_middleware.jwtAuthenticate, controller.createAmbulance);
+app.get('/add-ambulance', jwt_auth_middleware.jwtAuthenticate, controller.getAddAmbulance);
+app.post('/add-ambulance', jwt_auth_middleware.jwtAuthenticate, controller.addAmbulance);
 
 // -- AMBULANCES LIST --
 app.get('/ambulances', jwt_auth_middleware.jwtAuthenticate, controller.ambulancesList);

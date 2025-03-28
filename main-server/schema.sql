@@ -2,6 +2,7 @@
 
 -- enums
 CREATE TYPE roles AS ENUM ('Admin', 'Nurse', 'Doctor');
+CREATE TYPE ambulance_status AS ENUM ('Available', 'On Duty', 'Maintenance');
 
 -- __ schemas for all the existing tables on our postgres database ______________________________
 
@@ -27,6 +28,9 @@ CREATE TABLE users (
 CREATE TABLE ambulances (
     id SERIAL PRIMARY KEY,
     matricule varchar(34) unique NOT NULL,
+    status ambulance_status, -- ('Available', 'On Duty', 'Maintenance'),
+    driver_name varchar(30),
+    driver_contact varchar(30)
 );
 
 -- _____________________________________________________________________________________________
