@@ -19,7 +19,6 @@ CREATE TABLE users (
     email TEXT UNIQUE NOT NULL,
     user_role roles, -- ('Admin', 'Nurse', 'Doctor')
     hashed_password varchar(72) NOT NULL,
-    is_admin boolean DEFAULT FALSE,
     created_at date DEFAULT CURRENT_DATE
 );
 
