@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>URGENSYNC - Add Ambulance</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="form-container">
+                <div class="logo-container">
+                    <i class="fas fa-ambulance"></i>
+                    <h1>URGENSYNC</h1>
+                </div>
+                <div class="form-wrapper">
+                    <form id="addAmbulanceForm" class="active" method="POST" action="/create-ambulance">
+                        <h2>Add New Ambulance</h2>
+                        <div class="input-info">
+                            <i class="fas fa-id-card"></i>
+                            <input type="text" placeholder="Ambulance ID" required name="ambulance_id">
+                        </div>
+                        <div class="input-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" placeholder="Location" required name="location">
+                        </div>
+                        <div class="input-info">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Driver Name" required name="driver_name">
+                        </div>
+                        <div class="input-info">
+                            <i class="fas fa-phone"></i>
+                            <input type="text" placeholder="Driver Contact" required name="driver_contact">
+                        </div>
+                        <div class="input-info">
+                            <i class="fas fa-clipboard-list"></i>
+                            <select required name="status">
+                                <option value="" disabled selected>Select Status</option>
+                                <option value="Available">Available</option>
+                                <option value="On Duty">On Duty</option>
+                                <option value="Maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-button">Add Ambulance</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="js/add-ambulance.js"></script>
+    </body>
+</html>

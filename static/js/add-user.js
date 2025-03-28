@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         errorDiv.style.marginTop = "5px";
         errorDiv.textContent = message;
 
-        // THIS DOESN'T WOOOOOOORK
+        // THIS DOESN'T WOOOOOOORK FUCK YOU IT DOES UNDER CERTAIN SPECIFIC CIRCUMSTANCES 
         /* const existingError = formInfo.querySelector('.error-message');
         if (existingError) {
             formInfo.removeChild(existingError);

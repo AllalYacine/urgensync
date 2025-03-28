@@ -21,12 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
         formInfo.appendChild(errorDiv);
         input.style.borderColor= "#ff3333";
 
-        // // THIS DOESN'T WOOOOOOORK
         // if an error message already exists and then another one comes then we remove the previous one idk i found it on a video
-        //const existingError = formInfo.querySelector('.error-message');
-        //if(existingError) {
-         //   formInfo.removeChild(existingError);
-        //}
+        const existingError = formInfo.querySelector('.error-message');
+        if(existingError) {
+            formInfo.removeChild(existingError);
+        }
 
         // after 15 seconds, 
         setTimeout(() => {
