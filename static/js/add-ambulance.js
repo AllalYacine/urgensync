@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return idRegex.test(id);
     };
 
-    const validateLocation = (location) => {
+    /* const validateLocation = (location) => {
         return location.trim().length >= 3;
-    };
+    }; */
 
     const validateDriverName = (name) => {
         const nameRegex = /^[A-Za-z]+( [A-Za-z]+)?$/;
@@ -46,21 +46,21 @@ document.addEventListener('DOMContentLoaded', () => {
     addAmbulanceForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const ambulanceID = addAmbulanceForm.querySelector('input[name="ambulance_id"]');
-        const location = addAmbulanceForm.querySelector('input[name="location"]');
+        const ambulanceID = addAmbulanceForm.querySelector('input[name="matricule"]');
+        //const location = addAmbulanceForm.querySelector('input[name="location"]');
         const driverName = addAmbulanceForm.querySelector('input[name="driver_name"]');
         const driverContact = addAmbulanceForm.querySelector('input[name="driver_contact"]');
         const status = addAmbulanceForm.querySelector('select[name="status"]');
 
         if (!validateAmbulanceID(ambulanceID.value)) {
-            showError(ambulanceID, 'Invalid Ambulance ID. Use at least 3 alphanumeric characters.');
+            showError(ambulanceID, 'Invalid Ambulance ID. Use 10 numeric characters.');
             return;
         }
 
-        if (!validateLocation(location.value)) {
+        /* if (!validateLocation(location.value)) {
             showError(location, 'Location must be at least 3 characters long.');
             return;
-        }
+        } */
 
         if (!validateDriverName(driverName.value)) {
             showError(driverName, 'Invalid driver name. Use only letters with a single space.');
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const formData = new URLSearchParams();
         formData.append("ambulance_id", ambulanceID.value);
-        formData.append("location", location.value);
+        /* formData.append("location", location.value); */
         formData.append("driver_name", driverName.value);
         formData.append("driver_contact", driverContact.value);
         formData.append("status", status.value);
@@ -97,9 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (result.ambulanceError) {
             showError(ambulanceID, result.ambulanceError);
-        } else if (result.locationError) {
+        } /* else if (result.locationError) {
             showError(location, result.locationError);
-        } else if (result.driverError) {
+        } */ else if (result.driverError) {
             showError(driverName, result.driverError);
         } else if (result.contactError) {
             showError(driverContact, result.contactError);
